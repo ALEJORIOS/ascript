@@ -1,1 +1,3 @@
-<p>write works!</p>
+<div class="preview" [innerHTML]="compiler()"></div>
+<textarea class="textbox" [(ngModel)]="textContent" rows="10" placeholder="Comienza aquí"></textarea>
+<button (click)="replaceChar()">Mostrar</button>
