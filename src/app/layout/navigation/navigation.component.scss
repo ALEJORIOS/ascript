@@ -1,0 +1,78 @@
+@import '../../../assets/scss/variables.scss';
+@mixin navigator($right, $width){
+    right: $right;
+    width: $width;
+}
+
+.navigation {
+    background-color: rgba($color: $color-background, $alpha: 0.8);
+    position: absolute;
+    display: flex;
+    justify-content: space-between;
+    font-family: $font-nav-01;
+    top: 0;
+    margin: 0;
+    width: 100%;
+    height: 3rem;
+    backdrop-filter: blur(4px);
+    filter: drop-shadow(0 4px 4px rgba($color: #C2C2C2, $alpha: 0.25));
+    box-shadow: inset 0 -4px 8px rgba($color: #C2C2C2, $alpha: 0.15);
+    .logo {
+        height: 100%;
+        cursor: pointer;
+    }
+    .phrase {
+        height: 100%;
+        display: flex;
+        align-items: center;
+        font-weight: 400;
+        color: $color-text-phrase;
+        font-size: 1.2rem;
+    }
+    .nav{
+        position: relative;
+        display: flex;
+        height: 100%;
+        align-items: center;
+        margin-right: 1rem;
+        .navigator-ghost{
+            position: absolute;
+            top: calc( 3rem - 5px);
+            width: 0;
+            height: 5px;
+            background-color: $color-logo;
+            transition: all 0.3s ease-in-out;
+            right: 0;
+        }
+        button{
+            display: flex;
+            height: 100%;
+            text-decoration: none;
+            color: $color-text-navigation;
+            background-color: transparent;
+            border: none;
+            align-items: center;
+            width: auto;
+            cursor: pointer;
+            &:hover{
+                background-color: #f0f0f6;
+                transition: background-color 0.2s ease-out;
+            }
+        }
+        button:nth-child(1):hover~.navigator-ghost{
+            @include navigator(315.14px, 46.5px);
+        }
+        button:nth-child(2):hover~.navigator-ghost{
+            @include navigator(213.17px, 101.97px);
+        }
+        button:nth-child(3):hover~.navigator-ghost{
+            @include navigator(151.36px, 61.81px);
+        }
+        button:nth-child(4):hover~.navigator-ghost{
+            @include navigator(99.17px, 52.19px);
+        }
+        button:nth-child(5):hover~.navigator-ghost{
+            @include navigator(0px, 99.17px);
+        }
+    }
+}
