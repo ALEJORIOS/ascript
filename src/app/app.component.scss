@@ -1,12 +1,15 @@
+@import '../assets/scss/variables.scss';
+
 .grid{
     display: grid;
     min-height: 100vh;
     grid-template-rows: auto 1fr auto;
 
     .content{
-        padding-top: 5rem;
+        padding-top: 3rem;
         padding-left: 3rem;
         padding-right: 1rem;
         padding-bottom: 1rem;
+        background-color: $color-background;
     }
 }

@@ -1,0 +1,29 @@
+.article{
+    display: grid;
+    grid-template-columns: 64px auto;
+    gap: 8px;
+    .img{
+        grid-column: 1/2;
+        img{
+            overflow: hidden;
+            width: 58px;
+            height: 58px;
+            border-radius: 50%;
+        }
+    }
+    .desc{
+        .title{
+            font-family: 'Alata', sans-serif;
+            font-size: 1.4rem;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+        .author{
+            font-family: 'Alata', sans-serif;
+            font-size: 0.8rem;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            color: #7a7a7a;
+        }
+    }
+}
