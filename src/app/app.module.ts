@@ -1,3 +1,4 @@
+import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
@@ -6,7 +7,6 @@ import { AppComponent } from './app.component';
 import { NotfoundComponent } from './extrapages/notfound/notfound.component';
 import { FooterComponent } from './layout/footer/footer.component';
 import { NavigationComponent } from './layout/navigation/navigation.component';
-import { ArticleComponent } from './shared/cmps/lateral-right/article/article.component';
 
 @NgModule({
   declarations: [
@@ -17,6 +17,7 @@ import { ArticleComponent } from './shared/cmps/lateral-right/article/article.co
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     AppRoutingModule
   ],
   providers: [],

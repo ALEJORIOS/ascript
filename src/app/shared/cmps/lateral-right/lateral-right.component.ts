@@ -1,3 +1,4 @@
+import { BaseService } from './../../../services/base.service';
 import { Component, OnInit } from '@angular/core';
 import { ArticleComponent } from './article/article.component';
 
@@ -20,9 +21,16 @@ export class LateralRightComponent implements OnInit {
     "content": "Hola mundo este es el contenido"
   }
 
-  constructor() { }
+  constructor(private baseService: BaseService) { }
 
   ngOnInit(): void {
+    this.getTrends();
+  }
+
+  getTrends(){
+    this.baseService.getTrends().subscribe(res => {
+      console.log(res);
+    });
   }
 
 }

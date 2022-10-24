@@ -1,7 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { prueba } from 'ascript-types';
 
 @Component({
   standalone: true,
@@ -39,7 +38,6 @@ export class WriteComponent implements OnInit {
   textContent: string = "";
   
   ngOnInit(): void {
-    console.log(prueba());
   }
 
   compiler(): string {
