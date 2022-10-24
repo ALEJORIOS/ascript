@@ -1,16 +1,69 @@
-.textbox{
-    width: 100%;
-    white-space: pre-wrap;
+.write {
+    display: grid;
+    grid-template-columns: 3fr 2fr;
+    .preview {
+        margin: 1rem;
+        height: fit-content;
+        font-family: 'Lato', sans-serif;
+        grid-column: 1/2;
+        display: flex;
+        flex-direction: column;
+        .title{
+            font-family: 'Alata', sans-serif;
+            font-size: 3rem;
+        }
+        .info{
+            color: #B0B0B0;
+        }
+    }
+
+    .editArea {
+        margin: 1rem;
+        grid-column: 2/3;
+        .title{
+            font-family: 'Lato', sans-serif;
+            border: 1px solid #F0F0F0;
+            height: 2.2rem;
+            padding-left: 1rem;
+            border-radius: 4px;
+            width: 100%;
+            resize: none;
+            box-sizing: border-box;
+            margin-bottom: 0.4rem;
+        }
+        .textbox{
+            font-family: 'Lato', sans-serif;
+            border: 1px solid #F0F0F0;
+            padding: 1rem;
+            border-radius: 4px;
+            width: 100%;
+            resize: vertical;
+            box-sizing: border-box;
+        }
+        .optionButtons {
+            display: flex;
+            font-family: 'Alata', sans-serif;
+            gap: 0.2rem;
+            .save{
+                border: none;
+                border-radius: 8px;
+                padding: 10px 12px;
+                color: #F0F0F0;
+                font-weight: 400;
+                letter-spacing: 0.5pt;
+                background-color: #177EAA;
+            }
+            .publish{
+                border: none;
+                border-radius: 8px;
+                padding: 10px 12px;
+                color: #F0F0F0;
+                font-weight: 400;
+                letter-spacing: 0.5pt;
+                background-color: #2BC016;
+            }
+        }
+    }
+
 }
 
-.title{
-    color: red;
-}
-
-.subtitle{
-    color: blue;
-}
-
-.subtitle2{
-    color: green;
-}

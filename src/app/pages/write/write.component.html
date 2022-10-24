@@ -1,3 +1,16 @@
-<div class="preview" [innerHTML]="compiler()"></div>
-<textarea class="textbox" [(ngModel)]="textContent" rows="10" placeholder="Comienza aquí"></textarea>
-<button (click)="replaceChar()">Mostrar</button>
+<div class="write">
+    <div class="preview">
+        <span class="title">{{ title.value || "Título del documento" }}</span>
+        <span class="info">{{ user }} - {{ date }}</span>
+        <div class="body" [innerHTML]="compiledHTML"></div>
+    </div>
+    <div class="editArea">
+        <input type="text" class="title" rows="1" placeholder="Título" [formControl]="title">
+        <textarea class="textbox" [(ngModel)]="textContent" rows="15" placeholder="Cuerpo del artículo" (ngModelChange)="compile()"></textarea>
+        <div class="optionButtons">
+            <button class="save">Guardar</button>
+            <button class="publish">Publicar</button>
+        </div>
+    </div>
+</div>
+

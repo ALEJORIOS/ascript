@@ -12,14 +12,7 @@ import { ArticleComponent } from './article/article.component';
 export class LateralRightComponent implements OnInit {
 
 
-  prueba = {
-    "_id":{"$oid":"635316b92d8db8fbc80f2988"},
-    "name": "Documento de prueba",
-    "author": "Alejandro Ríos",
-    "creation_date": "10-21-2022",
-    "views": 1234,
-    "content": "Hola mundo este es el contenido"
-  }
+  trend: any;
 
   constructor(private baseService: BaseService) { }
 
@@ -29,6 +22,7 @@ export class LateralRightComponent implements OnInit {
 
   getTrends(){
     this.baseService.getTrends().subscribe(res => {
+      this.trend = res;
       console.log(res);
     });
   }
