@@ -19,6 +19,7 @@
         .links{
             display: grid;
             grid-template-columns: 1fr 1fr;
+            user-select: none;
 
             .left-links{
                 grid-column: 1/2;
@@ -61,11 +62,66 @@
                 grid-row: 1/2;
                 font-family: 'Alata', sans-serif;
                 font-size: 2rem;
+                user-select: none;
             }
             .icon{
                 grid-row: 2/3;
                 justify-self: center;
+                user-select: none;
+                #github{
+                    width: 40px;
+                }
+                #twitter{
+                    width: 50px;
+                }
+                #instagram{
+                    width: 40px;
+                }
             }
         }
+    }
+}
+
+@media (max-width: 1032px){
+    .footer{
+        height: 13vh;
+        grid-template-columns: 1fr;
+        grid-template-rows: auto 1fr;
+        justify-items: center;
+        .logo-dark{
+            margin: 0;
+        }
+        .right{
+            grid-column: 1/2;
+            margin: 0;
+            .links{
+                display: none;
+            }
+            .social{
+                grid-template-rows: 1fr;
+                align-self: flex-start;
+                .title{
+                    display: none;
+                }
+                .icon{
+                    grid-row: 1/2;
+                    #github{
+                        width: 20px;
+                    }
+                    #twitter{
+                        width: 25px;
+                    }
+                    #instagram{
+                        width: 20px;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media (min-aspect-ratio: 2/1){
+    .footer{
+        height: 40vh;
     }
 }

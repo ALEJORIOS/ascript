@@ -41,15 +41,6 @@
         align-items: center;
         margin-right: 1rem;
         user-select: none;
-        .navigator-ghost{
-            position: absolute;
-            top: calc( 3rem - 5px);
-            width: 0;
-            height: 5px;
-            background-color: $color-logo;
-            transition: all 0.3s ease-in-out;
-            right: 0;
-        }
         button{
             display: flex;
             height: 100%;
@@ -62,23 +53,24 @@
             cursor: pointer;
             &:hover{
                 background-color: #f0f0f6;
-                transition: background-color 0.2s ease-out;
+                transition: background-color 0.25s ease-out;
             }
         }
-        button:nth-child(1):hover~.navigator-ghost{
-            @include navigator(315.14px, 46.5px);
-        }
-        button:nth-child(2):hover~.navigator-ghost{
-            @include navigator(213.17px, 101.97px);
-        }
-        button:nth-child(3):hover~.navigator-ghost{
-            @include navigator(151.36px, 61.81px);
-        }
-        button:nth-child(4):hover~.navigator-ghost{
-            @include navigator(99.17px, 52.19px);
-        }
-        button:nth-child(5):hover~.navigator-ghost{
-            @include navigator(0px, 99.17px);
+        .activeRoute{
+            display: flex;
+            justify-content: center;
+
+            &::after{
+                content: "";
+                width: 6px;
+                height: 6px;
+                background-color: #177EAA;
+                border-radius: 50%;
+                position: absolute;
+                bottom: 12px;
+                transition: all 0.5s;
+                opacity: 1;
+            }
         }
     }
 }
