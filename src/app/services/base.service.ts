@@ -12,4 +12,8 @@ export class BaseService {
   getTrends(take: number = 5){
     return this.httpClient.get(`${API}docs/preview-trends?take=${take}`);
   }
+
+  getArticle(seqCode: string){
+    return this.httpClient.get(`${API}docs/read?seq=${seqCode}`);
+  }
 }

@@ -7,6 +7,10 @@ const routes: Routes = [
     loadComponent: () => import('./write/write.component').then(p => p.WriteComponent)
   },
   {
+    path: 'read/:doc',
+    loadComponent: () => import('./read/read.component').then(p => p.ReadComponent)
+  },
+  {
     path: 'home',
     loadComponent: () => import('./home/home.component').then(p => p.HomeComponent)
   },
