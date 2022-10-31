@@ -17,8 +17,77 @@
         .body{
             margin: 0;
         }
+    }
+    .largeNumber{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 50vh;
+        .title{
+            font-family: 'Alata', sans-serif;
+            font-size: 3rem;
+            margin-bottom: 0.8rem;
+        }
+        .info{
+            font-family: 'Lato', sans-serif;
+            font-size: 1.4rem;
+        }
+    }
+    .home{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        
+        .title{
+            margin-top:6rem;
+            font-family: 'Alata', sans-serif;
+            font-size: 3rem;
+        }
+        .searchBox{
+            width: 50%;
+            min-width: 30rem;
+            max-width: 30vw;
+            margin: 0.8rem;
+            display: flex;
+            position: relative;
+            input{
+                height: 2.4rem;
+                width: 100%;
+                padding: 0 0.5rem;
+                border-radius: 1rem;
+                border: 2px solid #177EAA;
+                outline: none;
+                font-family: 'lato', sans-serif;
+            }
+        }
         .tags{
 
+        }
+        .trends{
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            grid-template-rows: 1fr 1fr 1fr;
+            width: 100%;
+            gap: 1rem;
+            .doc{
+                border: 3px solid #f0f0f0;
+                border-radius: 5px;
+                padding: 6px;
+                .title{
+                    font-family: 'Alata', sans-serif;
+                    font-size: 1.2rem;
+                }
+                .info{
+                    font-family: 'Lato', sans-serif;
+                    font-size: 0.7rem;
+                    color: #B0B0B0;
+                }
+                .description{
+
+                }
+            }
         }
     }
 }

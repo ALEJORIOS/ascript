@@ -1,1 +1,16 @@
-<p>login works!</p>
+<div class="login">
+    <div class="login-box">
+        <img class="logo" src="assets/img/ascript_logo.png" alt="ascript-logo">
+        <form [formGroup]="form" (ngSubmit)="login()">
+            <input type="text" placeholder="Usuario" formControlName="user">
+            <span *ngIf="form.controls.user.touched && !form.controls.user.value" class="errorMsg">*el usuario es obligatorio</span>
+            <input type="password" placeholder="Contraseña" formControlName="password">
+            <span *ngIf="form.controls.password.touched && !form.controls.password.value" class="errorMsg">*la contraseña es obligatoria</span>
+            <div class="buttons">
+                <button id="language">Idioma</button>
+                <button id="register">Registrarse</button>
+                <button id="login" type="submit">Iniciar Sesión</button>
+            </div>
+        </form>
+    </div>
+</div>

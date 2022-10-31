@@ -1,7 +1,7 @@
 <div class="grid">
-    <navigation></navigation>
+    <navigation *ngIf="showLayout"></navigation>
     <div class="content">
         <router-outlet></router-outlet>
     </div>
-    <footer></footer>
+    <footer *ngIf="showLayout"></footer>
 </div>

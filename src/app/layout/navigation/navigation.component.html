@@ -8,10 +8,10 @@
         <span class="quotes"><i>"</i></span>
     </div>
     <div class="nav">
-        <button routerLink="/home" routerLinkActive="activeRoute">Inicio</button>
-        <button routerLink="/communities" routerLinkActive="activeRoute">Comunidades</button>
-        <button routerLink="/write" routerLinkActive="activeRoute">Escribir</button>
-        <button routerLink="/donate" routerLinkActive="activeRoute">Donar</button>
-        <button routerLink="/login" routerLinkActive="activeRoute">Iniciar Sesión</button>
+        <button 
+            *ngFor="let route of routes" 
+            [routerLink]="route.route"
+            routerLinkActive="activeRoute">{{ route.nameES }}
+        </button>
     </div>
 </div>

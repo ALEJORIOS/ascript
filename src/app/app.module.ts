@@ -13,7 +13,7 @@ import { NavigationComponent } from './layout/navigation/navigation.component';
     AppComponent,
     NotfoundComponent,
     NavigationComponent,
-    FooterComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,

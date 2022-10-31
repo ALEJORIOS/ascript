@@ -8,7 +8,11 @@ export class DatePipe implements PipeTransform {
 
   transform(value: unknown, ...args: unknown[]): unknown {
     moment.locale('es');
-    return moment(String(value)).format('LLLL');
+    if(moment(String(value)).isValid()){
+      return moment(String(value)).format('LLLL');
+    }else{
+      return "";
+    }
   }
 
 }

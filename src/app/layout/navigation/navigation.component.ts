@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { BaseService } from 'src/app/services/base.service';
 
 @Component({
   selector: 'navigation',
@@ -7,9 +8,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NavigationComponent implements OnInit {
 
-  constructor() { }
+  constructor(private baseService: BaseService) { }
 
+  routes: any = [];
   ngOnInit(): void {
+    this.getPublicPages();
+  }
+
+  getPublicPages(){
+    this.baseService.getPublicPages().subscribe({
+      next: (res) => this.routes = res,
+      error: (err) => console.error(err)
+    })
   }
 
 }

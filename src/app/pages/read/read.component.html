@@ -1,8 +1,29 @@
 <div class="read">
-    <div class="content">
+    <div *ngIf="largeNumber.home" class="home">
+        <span class="title">¿Que deseas leer hoy?</span>
+        <div class="searchBox">
+            <input type="text">
+        </div>
+        <div class="trends">
+            <div *ngFor="let doc of trend" class="doc">
+                <span class="title">{{ doc.name }}</span><br>
+                <span class="info">{{ doc.author }} · {{ doc.views }} visualizaciones · {{ doc.likes }} Me gusta</span>
+                <p class="description" ></p>
+            </div>
+        </div>
+    </div>
+    <div *ngIf="largeNumber.normal" class="content">
         <span class="title">{{ data.name }}</span>
         <span class="info">{{ data.author }} - {{ data.date | formatDate }}</span>
         <p class="description" [innerHTML]="description"></p>
         <p class="body" [innerHTML]="content"></p>
+    </div>
+    <div *ngIf="largeNumber.large" class="largeNumber">
+        <span class="title">Aún no hemos logrado esa cantidad de artículos</span>
+        <span class="info">pero con tu colaboración alcanzaremos esa meta muy pronto</span>
+    </div>
+    <div *ngIf="largeNumber.extraLarge" class="largeNumber">
+        <span class="title">Wow, ese número es muy grande</span>
+        <span class="info">Es más grande que toda la población de Estados Unidos, Rusia y Brasil ¡juntos!</span>
     </div>
 </div>

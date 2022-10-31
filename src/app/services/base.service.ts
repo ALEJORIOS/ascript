@@ -13,7 +13,12 @@ export class BaseService {
     return this.httpClient.get(`${API}docs/preview-trends?take=${take}`);
   }
 
-  getArticle(seqCode: string){
+  getArticle(seqCode: number){
     return this.httpClient.get(`${API}docs/read?seq=${seqCode}`);
   }
+
+  getPublicPages(){
+    return this.httpClient.get(`${API}public-pages`);
+  }
+
 }
