@@ -55,11 +55,10 @@
                 width: 100%;
                 justify-content: space-between;
                 margin-top: 0.6rem;
-                button{
-                    height: 2.4rem;
+
+                %actionButton {
                     border: none;
                     padding: 12px;
-                    padding-top: 8px;
                     border-radius: 6px;
                     cursor: pointer;
                     &#language{
@@ -74,6 +73,9 @@
                         background-color: #2BC016;
                         color: #fff;
                     }
+                }
+                button{
+                    @extend %actionButton;
                 }
             }
         }

@@ -32,6 +32,7 @@ export class RegisterComponent implements OnInit {
   }
 
   register(){
+    this.form.markAllAsTouched();
     if(!this.form.invalid){
       let requestBody: RegisterUser = {
         username: this.form.controls.user.value,

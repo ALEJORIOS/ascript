@@ -25,6 +25,7 @@
             <input type="password" placeholder="Repite la contraseña" formControlName="repeatPassword">
             <span *ngIf="form.hasError('mismatch') && form.controls.repeatPassword.touched" class="errorMsg">*Las contraseñas deben coincidir</span>
             <label><input type="checkbox" checked formControlName="terms">&nbsp;Acepto los términos y condiciones</label>
+            <span *ngIf="form.controls.terms.invalid && form.controls.terms.touched" class="errorMsg">*Es necesario aceptar los términos y condiciones</span>
             <button type="submit">Registrarse</button>
         </form>
     </div>
