@@ -15,12 +15,13 @@ import { SpinnerComponent } from 'src/app/shared/cmps/spinner/spinner.component'
 })
 export class RegisterComponent implements OnInit {
 
+  submit: boolean = false;
   showElements = new showElements();
   validateUsernameClass: string = '';
 
   form = new FormGroup({
-    name: new FormControl('', Validators.required),
-    user: new FormControl('', [Validators.required, Validators.minLength(6), Validators.maxLength(20)]),
+    name: new FormControl('', [Validators.required, Validators.minLength(2), Validators.maxLength(25)]),
+    user: new FormControl('', [Validators.required, Validators.minLength(6), Validators.maxLength(20), this.usernameValidator()]),
     email: new FormControl('', [Validators.required, Validators.email], this.emailValidator()),
     password: new FormControl('', [Validators.required, Validators.minLength(8), Validators.maxLength(20)]),
     repeatPassword: new FormControl('', [Validators.required]),
@@ -32,6 +33,7 @@ export class RegisterComponent implements OnInit {
   }
 
   register(){
+    this.submit = true;
     this.form.markAllAsTouched();
     if(!this.form.invalid){
       let requestBody: RegisterUser = {
@@ -39,15 +41,24 @@ export class RegisterComponent implements OnInit {
         password: this.form.controls.password.value,
         email: this.form.controls.email.value,
         name: this.form.controls.name.value,
-        country: undefined,
-        donor: false,
-        status: 'A'
       }
       this.accountService.register(requestBody).subscribe({
-        next: (res) => this.router.navigate(['account/login']),
-        error: (err) => console.error(err)
+        next: (res) => {
+          this.router.navigate(['account/login']);
+          this.submit = false;
+        },
+        error: (err) => {
+          console.error(err);
+          this.submit = false;
+        }
       })
+    }else{
+      this.submit = false;
     }
+  }
+
+  show(){
+    console.log(this.form);
   }
 
   emailValidator(): AsyncValidatorFn {
@@ -68,6 +79,12 @@ export class RegisterComponent implements OnInit {
       }else{
         return null;
       }
+    }
+  }
+
+  usernameValidator(): ValidatorFn {
+    return (control: AbstractControl): ValidationErrors | null => {
+      return control.value.includes(' ') ? {space: true} : null;
     }
   }
 
@@ -118,7 +135,4 @@ export interface RegisterUser {
   password: string | null;
   email: string | null;
   name: string | null;
-  country: string | undefined;
-  donor: boolean;
-  status: string;
 }

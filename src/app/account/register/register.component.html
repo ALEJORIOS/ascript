@@ -5,12 +5,15 @@
         <form [formGroup]="form" (ngSubmit)="register()">
             <input type="text" placeholder="Nombre" formControlName="name">
             <span *ngIf="form.controls.name.touched && !form.controls.name.value" class="errorMsg">*El nombre es obligatorio</span>
+            <span *ngIf="form.controls.name.touched && form.controls.name.hasError('minlength')" class="errorMsg">*El nombre es muy corto</span>
+            <span *ngIf="form.controls.name.touched && form.controls.name.hasError('maxlength')" class="errorMsg">*El nombre es muy largo</span>
             <input type="text" placeholder="Usuario" formControlName="user">
             <span *ngIf="form.controls.user.touched && !form.controls.user.value" class="errorMsg">*El usuario es obligatorio</span>
             <span *ngIf="form.controls.user.touched && form.controls.user.hasError('minlength')" class="errorMsg">*El usuario es muy corto</span>
             <span *ngIf="form.controls.user.touched && form.controls.user.hasError('maxlength')" class="errorMsg">*El usuario es muy largo</span>
+            <span *ngIf="form.controls.user.touched && form.controls.user.hasError('space')" class="errorMsg">*El usuario no puede contener espacios</span>
             <div class="verify-username-box">
-                <button class="verify-username" (click)="verifyUsername()">Verificar</button>
+                <button type="button" class="verify-username" (click)="verifyUsername()">Verificar</button>
                 <spinner *ngIf="showElements.verifyUsernameSpinner"></spinner>
                 <span *ngIf="showElements.verifyUsernameShow" [ngClass]="validateUsernameClass"><h5>{{ showElements.verifyUsernameString  }}</h5></span>
             </div>            
@@ -26,7 +29,7 @@
             <span *ngIf="form.hasError('mismatch') && form.controls.repeatPassword.touched" class="errorMsg">*Las contraseñas deben coincidir</span>
             <label><input type="checkbox" checked formControlName="terms">&nbsp;Acepto los términos y condiciones</label>
             <span *ngIf="form.controls.terms.invalid && form.controls.terms.touched" class="errorMsg">*Es necesario aceptar los términos y condiciones</span>
-            <button type="submit">Registrarse</button>
+            <button type="submit"><span *ngIf="!submit">Registrarse</span><spinner *ngIf="submit"></spinner></button>
         </form>
     </div>
 </div>

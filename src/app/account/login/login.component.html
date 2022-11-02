@@ -7,8 +7,8 @@
             <input type="password" placeholder="Contraseña" formControlName="password">
             <span *ngIf="form.controls.password.touched && !form.controls.password.value" class="errorMsg">*la contraseña es obligatoria</span>
             <div class="buttons">
-                <button id="language">Idioma</button>
-                <button id="register" [routerLink]="['/account/register']">Registrarse</button>
+                <button id="language" type="button">Idioma</button>
+                <button id="register" type="button" [routerLink]="['/account/register']">Registrarse</button>
                 <button id="login" type="submit">Iniciar Sesión</button>
             </div>
         </form>

@@ -1,36 +1,36 @@
-/**
- * ==============================================
- * Dot Pulse
- * ==============================================
- */
-
  $dot-spacing: 12px;
  
- .dot-pulse {
-   position: relative;
-   width: 8px;
-   height: 8px;
-   border-radius: 50%;
-   margin: 2px;
-}
-
-.first{    
-    animation: dot-pulse 1.5s infinite cubic-bezier(0.075, 0.82, 0.165, 1);
-    background-color: #FCAB10;
-    animation-delay: 0s;
-}
-
-.second{   
-    animation: dot-pulse 1.5s infinite cubic-bezier(0.075, 0.82, 0.165, 1);
-    background-color: #177EAA;
-    animation-delay: 0.25s;
-}
-
-.third{
-    animation: dot-pulse 1.5s infinite cubic-bezier(0.075, 0.82, 0.165, 1);
-    background-color: #F8333C;
-    animation-delay: 0.5s;
+.spinner {
+  display: flex;
+  width: fit-content;
+  height: fit-content;
+  .dot-pulse {
+    position: relative;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    margin: 2px;
  }
+ 
+ .first{    
+     animation: dot-pulse 1.5s infinite cubic-bezier(0.075, 0.82, 0.165, 1);
+     background-color: #FCAB10;
+     animation-delay: 0s;
+ }
+ 
+ .second{   
+     animation: dot-pulse 1.5s infinite cubic-bezier(0.075, 0.82, 0.165, 1);
+     background-color: #177EAA;
+     animation-delay: 0.25s;
+ }
+ 
+ .third{
+     animation: dot-pulse 1.5s infinite cubic-bezier(0.075, 0.82, 0.165, 1);
+     background-color: #F8333C;
+     animation-delay: 0.5s;
+  }
+}
+
  
  @keyframes dot-pulse {
    0% {

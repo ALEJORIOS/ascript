@@ -121,8 +121,9 @@
                 height: 2.4rem;
                 width: 100%;
                 border: none;
-                padding: 12px;
-                padding-top: 8px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
                 border-radius: 6px;
                 font-family: 'Alata', sans-serif;
                 background-color: #2BC016;

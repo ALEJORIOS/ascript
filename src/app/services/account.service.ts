@@ -9,8 +9,12 @@ export class AccountService {
 
   constructor(private httpClient: HttpClient) { }
 
-  login(){
-    // this.httpClient.get(`${API}`)
+  login(username: string, password: string){
+    this.httpClient.get(`${API}user/login`, {
+      params: new HttpParams()
+        .set('username', username)
+        .set('password', password)
+    })
   }
 
   verifyUsername(username: string){
