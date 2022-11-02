@@ -7,12 +7,23 @@
             <span *ngIf="form.controls.name.touched && !form.controls.name.value" class="errorMsg">*El nombre es obligatorio</span>
             <input type="text" placeholder="Usuario" formControlName="user">
             <span *ngIf="form.controls.user.touched && !form.controls.user.value" class="errorMsg">*El usuario es obligatorio</span>
+            <span *ngIf="form.controls.user.touched && form.controls.user.hasError('minlength')" class="errorMsg">*El usuario es muy corto</span>
+            <span *ngIf="form.controls.user.touched && form.controls.user.hasError('maxlength')" class="errorMsg">*El usuario es muy largo</span>
+            <div class="verify-username-box">
+                <button class="verify-username" (click)="verifyUsername()">Verificar</button>
+                <spinner *ngIf="showElements.verifyUsernameSpinner"></spinner>
+                <span *ngIf="showElements.verifyUsernameShow" [ngClass]="validateUsernameClass"><h5>{{ showElements.verifyUsernameString  }}</h5></span>
+            </div>            
             <input type="email" placeholder="Correo electrónico" formControlName="email">
             <span *ngIf="form.controls.email.touched && !form.controls.email.value" class="errorMsg">*El correo electónico es obligatorio</span>
+            <span *ngIf="form.controls.email.touched && form.controls.email.hasError('email')" class="errorMsg">*Correo electrónico inválido</span>
+            <span *ngIf="form.controls.email.hasError('availableEmail') && form.controls.email.touched" class="errorMsg">*Este correo ya ha sido registrado anteriormente</span>
             <input type="password" placeholder="Contraseña" formControlName="password">
             <span *ngIf="form.controls.password.touched && !form.controls.password.value" class="errorMsg">*La contraseña es obligatoria</span>
+            <span *ngIf="form.controls.password.touched && form.controls.password.hasError('minlength')" class="errorMsg">*La contraseña es muy corta</span>
+            <span *ngIf="form.controls.password.touched && form.controls.password.hasError('maxlength')" class="errorMsg">*La contraseña es muy larga</span>
             <input type="password" placeholder="Repite la contraseña" formControlName="repeatPassword">
-            <span *ngIf="form.controls.repeatPassword.touched && !form.controls.repeatPassword.value" class="errorMsg">*El nombre es obligatorio</span>
+            <span *ngIf="form.hasError('mismatch') && form.controls.repeatPassword.touched" class="errorMsg">*Las contraseñas deben coincidir</span>
             <label><input type="checkbox" checked formControlName="terms">&nbsp;Acepto los términos y condiciones</label>
             <button type="submit">Registrarse</button>
         </form>

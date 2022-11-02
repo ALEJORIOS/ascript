@@ -1,0 +1,14 @@
+.communities{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Alata', sans-serif;
+    margin-top: 10rem;
+    .title{
+        font-size: 3rem;
+    }
+    .msg{
+        font-size: 1.2rem;
+    }
+}

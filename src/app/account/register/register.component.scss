@@ -64,7 +64,7 @@
             input[type=checkbox]{
                 width: 1.2rem;
                 height: 1.2rem;
-                accent-color: #177eaa;
+                accent-color: #177EAA;
                 margin-top: 0.6rem;
             }
             label{
@@ -79,7 +79,44 @@
                     outline: 3px solid #F8333C20;
                 }
             }
-            button{
+            .verify-username{
+                border: none;
+                margin-top: 0.3rem;
+                margin-right: 0.5rem;
+                height: 2.4rem;
+                border-radius: 6px;
+                font-family: 'Alata', sans-serif;
+                background-color: #177EAA;
+                color: #fff;
+                cursor: pointer;
+            }
+            .verify-username-box{
+                display: flex;
+                align-items: center;
+                .validation-success{
+                    color: #2BC016;
+                    background-color: #2BC01620;
+                    height: 2.4rem;
+                    margin-top: 0.3rem;
+                    border-radius: 6px;
+                    h5{
+                        line-height: 2.4rem;
+                        margin: 0 1rem;
+                    }
+                }
+                .validation-error{
+                    color: #F8333C;
+                    background-color: #F8333C20;
+                    height: 2.4rem;
+                    margin-top: 0.3rem;
+                    border-radius: 6px;
+                    h5{
+                        line-height: 2.4rem;
+                        margin: 0 1rem;
+                    }
+                }
+            }
+            button[type=submit]{
                 margin-top: 0.8rem;
                 height: 2.4rem;
                 width: 100%;
