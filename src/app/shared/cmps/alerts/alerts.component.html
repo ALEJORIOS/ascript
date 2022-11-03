@@ -1,0 +1,7 @@
+<div [ngClass]="type">
+    <img *ngIf="type === 'error'" class="icon" src="assets/icons/error-icon.svg" width="18">
+    <img *ngIf="type === 'warning'" class="icon" src="assets/icons/warning-icon.svg" width="18">
+    <img *ngIf="type === 'success'" class="icon" src="assets/icons/success-icon.svg" width="18">
+    <img *ngIf="type === 'info'" class="icon" src="assets/icons/info-icon.svg" width="18">
+    <span style="margin-left: 0.3rem;"><ng-content></ng-content></span>
+</div>

@@ -1,15 +1,16 @@
 <div class="login">
     <div class="login-box">
         <img class="logo" src="assets/img/ascript_logo.png" alt="ascript-logo">
+        <alert *ngIf="alert.show" [type]="alert.type">{{ alert.text }}</alert>
         <form [formGroup]="form" (ngSubmit)="login()">
-            <input type="text" placeholder="Usuario" formControlName="user">
+            <input type="text" placeholder="Usuario" formControlName="user" (focus)="alert.hide()" autocomplete="username">
             <span *ngIf="form.controls.user.touched && !form.controls.user.value" class="errorMsg">*el usuario es obligatorio</span>
-            <input type="password" placeholder="Contraseña" formControlName="password">
+            <input type="password" placeholder="Contraseña" formControlName="password" (focus)="alert.hide()" autocomplete="current-password">
             <span *ngIf="form.controls.password.touched && !form.controls.password.value" class="errorMsg">*la contraseña es obligatoria</span>
             <div class="buttons">
                 <button id="language" type="button">Idioma</button>
                 <button id="register" type="button" [routerLink]="['/account/register']">Registrarse</button>
-                <button id="login" type="submit">Iniciar Sesión</button>
+                <button id="login" type="submit"><span *ngIf="!submit">Iniciar Sesión</span><spinner *ngIf="submit"></spinner></button>
             </div>
         </form>
     </div>

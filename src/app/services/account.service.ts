@@ -10,11 +10,7 @@ export class AccountService {
   constructor(private httpClient: HttpClient) { }
 
   login(username: string, password: string){
-    this.httpClient.get(`${API}user/login`, {
-      params: new HttpParams()
-        .set('username', username)
-        .set('password', password)
-    })
+    return this.httpClient.post(`${API}user/login`, {username, password})
   }
 
   verifyUsername(username: string){
