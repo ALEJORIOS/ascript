@@ -3,6 +3,7 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import * as MarkdownIt from 'markdown-it';
 import * as moment from 'moment';
+import { AppService } from 'src/app/services/app.service';
 
 @Component({
   standalone: true,
@@ -21,7 +22,7 @@ export class WriteComponent implements OnInit {
   md = new MarkdownIt();
   title = new FormControl('');
 
-  constructor() { }
+  constructor(private appService: AppService) { }
   
   textContent: string = '';
   

@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
 import { AccountService } from 'src/app/services/account.service';
+import { AppService } from 'src/app/services/app.service';
 import { alertMethods, AlertsComponent } from 'src/app/shared/cmps/alerts/alerts.component';
 import { SpinnerComponent } from 'src/app/shared/cmps/spinner/spinner.component';
 
@@ -22,7 +23,10 @@ export class LoginComponent implements OnInit {
 
   submit: boolean = false;
   alert = new alertMethods();
-  constructor(private router: Router, private accountService: AccountService) { }
+  constructor(
+    private router: Router, 
+    private accountService: AccountService,
+    private appService: AppService) { }
 
   ngOnInit(): void {
   }
@@ -34,13 +38,13 @@ export class LoginComponent implements OnInit {
     if(!this.form.invalid){
       this.accountService.login(this.form.controls.user.value || '', this.form.controls.password.value || '')
       .subscribe({
-        next: (res) => {
-          console.log(res);
-          console.log(typeof res);
-          if(typeof res === 'number'){
-            this.defineStatus(res);
+        next: (res: any) => {
+          if(res.status !== 1){
+            this.defineStatus(res.status);
           }else{
-
+            sessionStorage.setItem('jwt', res.value);
+            this.appService.isLogged = true;
+            this.router.navigate([res.landing]);
           }
         },
         error: (err) => {
