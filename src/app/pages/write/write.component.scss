@@ -20,11 +20,20 @@
             background-color: #177EAA1A;
             cursor: pointer;
         }
+        code{
+            display: flex;
+            padding: 0.5rem;
+            border: none;
+            background-color: #101010;
+            border-radius: 8px;
+            color: white;
+        }
     }
 
     .editArea {
         margin: 1rem;
         grid-column: 2/3;
+        grid-row: 1/2;
         .title{
             font-family: 'Lato', sans-serif;
             border: 1px solid #F0F0F0;
@@ -87,6 +96,7 @@
         margin-top: 0;
         padding: 1.6rem;
         grid-column: 2/3;
+        grid-row: 1/2;
         border-radius: 4px;
         border: 1px solid #F0F0F0;
         font-family: 'Lato', sans-serif;

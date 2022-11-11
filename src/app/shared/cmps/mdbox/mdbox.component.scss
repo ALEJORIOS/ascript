@@ -10,9 +10,6 @@
     .textArea{
         grid-column: 1/2;
         padding: .5rem;
-        .cover{
-            border: none;
-        }
         .field {
             overflow: hidden;
             width: 100%;
@@ -22,6 +19,7 @@
             outline: none;
             resize: none;
             box-sizing: border-box;
+            font-family: 'Alata', sans-serif;
         }
     }
     .rendered{
@@ -32,9 +30,25 @@
         border-left: 1px solid #f0f0f0;
         overflow-x: auto;
         margin: 0;
+        background-color: #177eaa1a;
+        cursor: pointer;
+        &:hover{
+            background-color: #177eaa2a;
+            transition: all 0.5s cubic-bezier(0.075, 0.82, 0.165, 1);
+        }
         &::ng-deep {
             *{
                 margin: 0;
+                width: 100%;
+                box-sizing: border-box;
+            }
+            code{
+                display: flex;
+                padding: 0.5rem;
+                border: none;
+                background-color: #101010;
+                border-radius: 8px;
+                color: white;
             }
         }
     }

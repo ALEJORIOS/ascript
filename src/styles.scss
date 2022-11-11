@@ -2,3 +2,12 @@
 @import 'assets/css/normalize.css';
 @import 'assets/scss/variables.scss';
 @import url('https://fonts.googleapis.com/css2?family=Alata&family=Anek+Devanagari:wght@200;400&family=Lato&display=swap');
+
+a {
+    color: #2BC016;
+    text-decoration: none;
+    font-family: 'Alata', sans-serif;
+    &:visited{
+        color: #228f13;
+    }
+}

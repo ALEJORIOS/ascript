@@ -6,7 +6,7 @@
     </div>
     <div class="editArea">
         <input type="text" class="title" rows="1" placeholder="Título" [formControl]="title">
-        <div class="textbox" [formControl]="contentBody" ngDefaultControl (input)="compileText()" [contentEditable] placeholder="Contenido del artículo"></div>
+        <div class="textbox" [formControl] ="contentBody" (input)="compileText()" [contentEditable] placeholder="Contenido del artículo"></div>
         <div class="optionButtons">
             <button class="save">Guardar</button>
             <button class="publish">Publicar</button>
@@ -17,7 +17,17 @@
         <p>Es necesario que tengas en cuenta que en ontenido del artículo que escribes es en Markdown, un lenguaje de marcado que te ayudará a simplificar algunas acciones como poner títulos o uso de cursivas, aquí te dejo algunas comandos básicos para que uses</p>
         <ul>
             <li>Encabezados</li>
-            <mdbox></mdbox>
+            <mdbox [text]="'# Lorem\n\n## Ipsum\n\n### Dolor'"></mdbox>
+            <li>Listas</li>
+            <mdbox [text]="'* Primer elemento\n+ Segundo elemento\n- Tercer elemento'"></mdbox>
+            <li>Decoración del texto</li>
+            <mdbox [text]="'*cursiva*\n**negrita**\n***cursiva y negrita***'"></mdbox>
+            <li>Enlaces</li>
+            <mdbox [text]="'[Link Ascript](ascript.live)'"></mdbox>
+            <li>Imágenes</li>
+            <mdbox [text]="'![Texto alternativo](https://acortar.link/1rAgFI)'"></mdbox>
+            <li>Código</li>
+            <mdbox [text]="'`Hola Mundo!`'"></mdbox>
         </ul>
         <p>Si necesitas una guía más completa acerca de markdown te dejo este <a href="">enlace</a> para que puedas sacar el máximo provecho a tus artículos.</p>
     </div>

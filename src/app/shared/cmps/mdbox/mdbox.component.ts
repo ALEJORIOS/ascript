@@ -1,7 +1,9 @@
 import { CommonModule } from '@angular/common';
-import { AfterViewInit, Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { Component, Input, OnChanges } from '@angular/core';
+import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { DomSanitizer } from '@angular/platform-browser';
 import * as MarkdownIt from 'markdown-it';
+import { ContentEditableDirective } from 'src/app/directives/content-editable.directive';
 
 @Component({
   standalone: true,
@@ -10,34 +12,41 @@ import * as MarkdownIt from 'markdown-it';
   styleUrls: ['./mdbox.component.scss'],
   imports: [
     FormsModule,
-    CommonModule
+    CommonModule,
+    ContentEditableDirective,
+    ReactiveFormsModule
   ]
 })
-export class MdboxComponent implements AfterViewInit {
+export class MdboxComponent implements OnChanges {
   
-  // @Input('text') content: string = '';
-  @ViewChild('field') field!: ElementRef;
+  @Input('text') content: string = '';
   fieldHeight: any = {};
-  constructor() { }
+  contentControl = new FormControl('');
 
-  compiledHTML: string = '';
-  
-  content: string = '';
+  constructor(private sanitizer: DomSanitizer) { }
+
+  compiledHTML: any;
 
   md = new MarkdownIt({
     html: true,
     breaks: true
   });
 
-  ngAfterViewInit(){
-    this.compile();
+  ngOnChanges(){
+    this.contentControl.setValue(this.content);
+    this.formatInput();
   }
 
   compile(){
-    this.compiledHTML = this.md.render(this.content);
-    this.fieldHeight.height = 'fit-content';
-    this.fieldHeight.height = `${(this.field.nativeElement as HTMLElement).scrollHeight}px`;
-    console.log(this.fieldHeight);
+    let preProccess = this.contentControl.value?.replaceAll('<div>','\n').replaceAll('</div>', '').replaceAll('<br>','\n');
+    let compiled = this.md.render(preProccess || '');
+    this.compiledHTML = this.sanitizer.bypassSecurityTrustHtml(compiled);
+  }
+
+  formatInput(){
+    let formattext = this.contentControl.value?.replaceAll('\n', '<br>');
+    this.contentControl.setValue(formattext || '');
+    this.compile();
   }
 
 }

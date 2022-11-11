@@ -1,8 +1,6 @@
 <div class="markdownRenderBox">
     <div class="textArea">
-        <div class="textareaCover" class="cover">
-            <textarea class="field" #field [(ngModel)]="content" (ngModelChange)="compile()" [ngStyle]="fieldHeight"></textarea>
-        </div>
+        <div class="field" [contentEditable] [formControl]="contentControl" ngDefaultControl (input)="compile()">Holis</div>
     </div>
     <div class="rendered" [innerHTML]="compiledHTML">
         

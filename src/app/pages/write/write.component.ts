@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import * as MarkdownIt from 'markdown-it';
 import * as moment from 'moment';
 import { ContentEditableDirective } from 'src/app/directives/content-editable.directive';
@@ -32,15 +33,14 @@ export class WriteComponent implements OnInit {
 
   contentBody = new FormControl('');
 
-  compiledHTML: string = '';
+  compiledHTML!: SafeHtml;
 
   user: string = "Alejandro Ríos"
 
   date: string = ""; 
 
-  constructor(private appService: AppService) { }
+  constructor(private appService: AppService, private sanitizer: DomSanitizer) { }
   
-
   ngOnInit(): void {
     moment.locale('es');
     this.date = moment().format('LLLL');
@@ -50,11 +50,8 @@ export class WriteComponent implements OnInit {
   }
 
   compileText(){
-    let preProccessArray = this.contentBody.value?.replace(new RegExp('&nbsp;', 'g'),' ').split('');
-    preProccessArray?.splice(Math.min(140, preProccessArray.length), 0, '</span>');
-    preProccessArray?.splice(0, 0, "<span class='introduction'>");
-    let preProccessString = preProccessArray?.join('') || '';
-    this.compiledHTML = this.md.render(preProccessString);
+    let preProccess = this.contentBody.value?.replaceAll('<div>','\n').replaceAll('</div>', '').replaceAll('<br>','\n')
+    let compiled = this.md.render(preProccess || '');
+    this.compiledHTML = this.sanitizer.bypassSecurityTrustHtml(compiled);
   }
-
 }
