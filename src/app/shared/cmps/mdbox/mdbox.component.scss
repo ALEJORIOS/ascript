@@ -1,0 +1,41 @@
+.markdownRenderBox{
+    margin: 0.2rem;
+    margin-left: 0;
+    width: 100%;
+    border: 1px solid #f0f0f0;
+    border-radius: 6px;
+    box-sizing: border-box;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    .textArea{
+        grid-column: 1/2;
+        padding: .5rem;
+        .cover{
+            border: none;
+        }
+        .field {
+            overflow: hidden;
+            width: 100%;
+            height: auto;
+            box-sizing: border-box;
+            border: none;
+            outline: none;
+            resize: none;
+            box-sizing: border-box;
+        }
+    }
+    .rendered{
+        box-sizing: border-box;
+        grid-column: 2/3;
+        padding: .5rem;
+        height: 100%;
+        border-left: 1px solid #f0f0f0;
+        overflow-x: auto;
+        margin: 0;
+        &::ng-deep {
+            *{
+                margin: 0;
+            }
+        }
+    }
+}

@@ -1,15 +1,24 @@
 <div class="write">
     <div class="preview">
-        <span class="title">{{ title.value || "Título del documento" }}</span>
+        <span class="title">{{ title.value || "Título del artículo" }}</span>
         <span class="info">{{ user }} - {{ date }}</span>
         <div class="body" [innerHTML]="compiledHTML"></div>
     </div>
     <div class="editArea">
         <input type="text" class="title" rows="1" placeholder="Título" [formControl]="title">
-        <textarea class="textbox" [(ngModel)]="textContent" rows="15" placeholder="Cuerpo del artículo" (ngModelChange)="compile()"></textarea>
+        <div class="textbox" [formControl]="contentBody" ngDefaultControl (input)="compileText()" [contentEditable] placeholder="Contenido del artículo"></div>
         <div class="optionButtons">
             <button class="save">Guardar</button>
             <button class="publish">Publicar</button>
         </div>
+    </div>
+    <div class="helpBox">
+        <h2>Escribiendo artículos</h2>
+        <p>Es necesario que tengas en cuenta que en ontenido del artículo que escribes es en Markdown, un lenguaje de marcado que te ayudará a simplificar algunas acciones como poner títulos o uso de cursivas, aquí te dejo algunas comandos básicos para que uses</p>
+        <ul>
+            <li>Encabezados</li>
+            <mdbox></mdbox>
+        </ul>
+        <p>Si necesitas una guía más completa acerca de markdown te dejo este <a href="">enlace</a> para que puedas sacar el máximo provecho a tus artículos.</p>
     </div>
 </div>

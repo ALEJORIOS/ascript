@@ -3,7 +3,9 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import * as MarkdownIt from 'markdown-it';
 import * as moment from 'moment';
+import { ContentEditableDirective } from 'src/app/directives/content-editable.directive';
 import { AppService } from 'src/app/services/app.service';
+import { MdboxComponent } from 'src/app/shared/cmps/mdbox/mdbox.component';
 
 @Component({
   standalone: true,
@@ -13,24 +15,31 @@ import { AppService } from 'src/app/services/app.service';
   imports: [
     CommonModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    ContentEditableDirective,
+    MdboxComponent
   ],
   encapsulation: ViewEncapsulation.None
 })
 export class WriteComponent implements OnInit {
 
-  md = new MarkdownIt();
+  md = new MarkdownIt({
+    html: true,
+    breaks: true
+  });
+
   title = new FormControl('');
 
-  constructor(private appService: AppService) { }
-  
-  textContent: string = '';
-  
+  contentBody = new FormControl('');
+
   compiledHTML: string = '';
 
   user: string = "Alejandro Ríos"
 
   date: string = ""; 
+
+  constructor(private appService: AppService) { }
+  
 
   ngOnInit(): void {
     moment.locale('es');
@@ -40,8 +49,12 @@ export class WriteComponent implements OnInit {
     }, 1000);
   }
 
-  compile(){
-    this.compiledHTML = this.md.render(this.textContent);
+  compileText(){
+    let preProccessArray = this.contentBody.value?.replace(new RegExp('&nbsp;', 'g'),' ').split('');
+    preProccessArray?.splice(Math.min(140, preProccessArray.length), 0, '</span>');
+    preProccessArray?.splice(0, 0, "<span class='introduction'>");
+    let preProccessString = preProccessArray?.join('') || '';
+    this.compiledHTML = this.md.render(preProccessString);
   }
 
 }

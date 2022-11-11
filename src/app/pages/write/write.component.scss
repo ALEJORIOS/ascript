@@ -15,6 +15,11 @@
         .info{
             color: #B0B0B0;
         }
+        .introduction{
+            color: #177EAA;
+            background-color: #177EAA1A;
+            cursor: pointer;
+        }
     }
 
     .editArea {
@@ -37,8 +42,18 @@
             padding: 1rem;
             border-radius: 4px;
             width: 100%;
+            height: 15rem;
             resize: vertical;
             box-sizing: border-box;
+            margin-bottom: 0.4rem;
+            &:empty{
+                &:not(:focus){
+                    &::after{
+                        content: attr(placeholder);
+                        color: #707070;
+                    }
+                }
+            }
         }
         .optionButtons {
             display: flex;
@@ -52,6 +67,7 @@
                 font-weight: 400;
                 letter-spacing: 0.5pt;
                 background-color: #177EAA;
+                cursor: pointer;
             }
             .publish{
                 border: none;
@@ -61,7 +77,21 @@
                 font-weight: 400;
                 letter-spacing: 0.5pt;
                 background-color: #2BC016;
+                cursor: pointer;
             }
+        }
+    }
+
+    .helpBox{
+        margin: 1rem;
+        margin-top: 0;
+        padding: 1.6rem;
+        grid-column: 2/3;
+        border-radius: 4px;
+        border: 1px solid #F0F0F0;
+        font-family: 'Lato', sans-serif;
+        h2 {
+            margin-top: 0;
         }
     }
 
