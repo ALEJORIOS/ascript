@@ -30,7 +30,6 @@ export class ReadComponent implements OnInit {
   md = new MarkdownIt();
   constructor(route: ActivatedRoute, private baseService: BaseService) {
     this.sequence = parseInt(route.snapshot.paramMap.get('doc') || "0");
-    console.log(this.sequence);
     if(this.sequence === 0){
       this.setLargeNumber('home');
     }else{

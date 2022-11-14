@@ -3,15 +3,11 @@
         <img class="logo" src="assets/img/ascript_logo.png" alt="Home">
     </a>
     <div class="phrase">
-        <span class="quotes"><i>"</i></span>
-        <span><i>Dios es amor</i></span>
-        <span class="quotes"><i>"</i></span>
+        <span *ngIf="loadingPhrase"></span>
+        <span *ngIf="!loadingPhrase"><i>{{ phrase }}</i></span>
     </div>
     <div class="nav">
-        <button 
-            *ngFor="let route of routes" 
-            [routerLink]="route.route"
-            routerLinkActive="activeRoute">{{ route.nameES }}
+        <button *ngFor="let route of routes" [routerLink]="route.route" routerLinkActive="activeRoute">{{ route.nameES }}
         </button>
     </div>
 </div>

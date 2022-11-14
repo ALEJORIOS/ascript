@@ -9,16 +9,32 @@ export class BaseService {
 
   constructor(private httpClient: HttpClient) { }
 
-  getTrends(take: number = 5){
+  getTrends(take: number = 5) {
     return this.httpClient.get(`${API}docs/preview-trends?take=${take}`);
   }
 
-  getArticle(seqCode: number){
+  getArticle(seqCode: number) {
     return this.httpClient.get(`${API}docs/read?seq=${seqCode}`);
   }
 
-  getPublicPages(){
+  getPublicPages() {
     return this.httpClient.get(`${API}public-pages`);
+  }
+
+  getPhrase() {
+    return this.httpClient.get<string>(`${API}phrase`);
+  }
+
+  postSaveDoc(body: any) {
+    return this.httpClient.post(`${API}docs/save-doc`, body);
+  }
+
+  postPublishDoc(body: any) {
+    return this.httpClient.post(`${API}docs/publish-doc`, body);
+  }
+
+  getSeq() {
+    return this.httpClient.get(`${API}docs/seq`);
   }
 
 }

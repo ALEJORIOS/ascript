@@ -6,21 +6,22 @@
         height: fit-content;
         font-family: 'Lato', sans-serif;
         grid-column: 1/2;
+        grid-row: 1/3;
         display: flex;
         flex-direction: column;
-        .title{
+        .title {
             font-family: 'Alata', sans-serif;
             font-size: 3rem;
         }
-        .info{
+        .info {
             color: #B0B0B0;
         }
-        .introduction{
+        .introduction {
             color: #177EAA;
             background-color: #177EAA1A;
             cursor: pointer;
         }
-        code{
+        code {
             display: flex;
             padding: 0.5rem;
             border: none;
@@ -29,12 +30,10 @@
             color: white;
         }
     }
-
     .editArea {
         margin: 1rem;
         grid-column: 2/3;
-        grid-row: 1/2;
-        .title{
+        .title {
             font-family: 'Lato', sans-serif;
             border: 1px solid #F0F0F0;
             height: 2.2rem;
@@ -44,31 +43,42 @@
             resize: none;
             box-sizing: border-box;
             margin-bottom: 0.4rem;
+            &:focus {
+                outline: 3px solid #177EAA20;
+                border: 1px solid #177EAA;
+                transition: all 0.1s ease-out;
+            }
         }
-        .textbox{
+        .textbox {
             font-family: 'Lato', sans-serif;
             border: 1px solid #F0F0F0;
             padding: 1rem;
             border-radius: 4px;
             width: 100%;
-            height: 15rem;
+            height: fit-content;
+            min-height: 15rem;
             resize: vertical;
             box-sizing: border-box;
             margin-bottom: 0.4rem;
-            &:empty{
-                &:not(:focus){
-                    &::after{
+            &:empty {
+                &:not(:focus) {
+                    &::after {
                         content: attr(placeholder);
                         color: #707070;
                     }
                 }
+            }
+            &:focus {
+                outline: 3px solid #177EAA20;
+                border: 1px solid #177EAA;
+                transition: all 0.1s ease-out;
             }
         }
         .optionButtons {
             display: flex;
             font-family: 'Alata', sans-serif;
             gap: 0.2rem;
-            .save{
+            .save {
                 border: none;
                 border-radius: 8px;
                 padding: 10px 12px;
@@ -78,7 +88,7 @@
                 background-color: #177EAA;
                 cursor: pointer;
             }
-            .publish{
+            .publish {
                 border: none;
                 border-radius: 8px;
                 padding: 10px 12px;
@@ -90,13 +100,11 @@
             }
         }
     }
-
-    .helpBox{
+    .helpBox {
         margin: 1rem;
         margin-top: 0;
         padding: 1.6rem;
         grid-column: 2/3;
-        grid-row: 1/2;
         border-radius: 4px;
         border: 1px solid #F0F0F0;
         font-family: 'Lato', sans-serif;
@@ -104,6 +112,4 @@
             margin-top: 0;
         }
     }
-
 }
-

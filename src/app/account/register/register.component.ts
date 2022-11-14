@@ -57,10 +57,6 @@ export class RegisterComponent implements OnInit {
     }
   }
 
-  show(){
-    console.log(this.form);
-  }
-
   emailValidator(): AsyncValidatorFn {
     return (control: AbstractControl): Observable<ValidationErrors | null> => {
       return this.accountService.verifyEmail(control.value).pipe(map(check => {

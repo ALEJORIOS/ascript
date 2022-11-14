@@ -11,14 +11,27 @@ export class NavigationComponent implements OnInit {
   constructor(private baseService: BaseService) { }
 
   routes: any = [];
+  loadingPhrase: boolean = false;
+  phrase: string = '';
+
   ngOnInit(): void {
     this.getPublicPages();
+    this.getPhrase();
   }
 
-  getPublicPages(){
+  getPublicPages() {
     this.baseService.getPublicPages().subscribe({
       next: (res) => this.routes = res,
       error: (err) => console.error(err)
+    })
+  }
+
+  getPhrase() {
+    this.loadingPhrase = true;
+    this.baseService.getPhrase().subscribe({
+      next: (res) => this.phrase = res,
+      error: (err) => console.error(err),
+      complete: () => this.loadingPhrase = false
     })
   }
 

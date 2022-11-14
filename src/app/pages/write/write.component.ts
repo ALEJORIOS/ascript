@@ -4,9 +4,12 @@ import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import * as MarkdownIt from 'markdown-it';
 import * as moment from 'moment';
+import { switchMap } from 'rxjs';
 import { ContentEditableDirective } from 'src/app/directives/content-editable.directive';
 import { AppService } from 'src/app/services/app.service';
+import { BaseService } from 'src/app/services/base.service';
 import { MdboxComponent } from 'src/app/shared/cmps/mdbox/mdbox.component';
+import { JwtHelperService } from "@auth0/angular-jwt";
 
 @Component({
   standalone: true,
@@ -35,13 +38,19 @@ export class WriteComponent implements OnInit {
 
   compiledHTML!: SafeHtml;
 
-  user: string = "Alejandro Ríos"
+  user: string = "";
+
+  username: string = "";
 
   date: string = ""; 
 
-  constructor(private appService: AppService, private sanitizer: DomSanitizer) { }
+  constructor(
+    private appService: AppService, 
+    private sanitizer: DomSanitizer,
+    private baseService: BaseService) { }
   
   ngOnInit(): void {
+    this.getUsername();
     moment.locale('es');
     this.date = moment().format('LLLL');
     setTimeout(() => {
@@ -49,9 +58,30 @@ export class WriteComponent implements OnInit {
     }, 1000);
   }
 
+  getUsername(){
+    const helper = new JwtHelperService();
+    const decodedToken = helper.decodeToken(sessionStorage.getItem('jwt') || '');
+    console.log(decodedToken)
+    this.user = decodedToken.name;
+    this.username = decodedToken.username;
+  }
+
   compileText(){
-    let preProccess = this.contentBody.value?.replaceAll('<div>','\n').replaceAll('</div>', '').replaceAll('<br>','\n')
+    let preProccess = this.contentBody.value?.replaceAll('<div>','\n').replaceAll('</div>', '').replaceAll('<br>','\n').replaceAll('~', '');
     let compiled = this.md.render(preProccess || '');
     this.compiledHTML = this.sanitizer.bypassSecurityTrustHtml(compiled);
+  }
+
+  save() {
+    this.baseService.getSeq()
+    .pipe(switchMap(seq => this.baseService.postSaveDoc({name: this.title.value, author: this.username, date: moment(), content: this.contentBody.value, seq})))
+    .subscribe(res => console.log(res));
+  }
+
+  publish() {
+    console.log(this.username);
+    this.baseService.getSeq()
+    .pipe(switchMap(seq => this.baseService.postPublishDoc({name: this.title.value, author: this.username, date: moment(), content: this.contentBody.value, seq})))
+    .subscribe(res => console.log(res));
   }
 }
