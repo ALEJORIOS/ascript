@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AppService } from 'src/app/services/app.service';
 
 @Component({
   standalone: true,
@@ -8,9 +9,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ArticlesComponent implements OnInit {
 
-  constructor() { }
+  constructor(private appService: AppService) { }
 
   ngOnInit(): void {
   }
 
+  setPages() {
+    this.appService.setAvailablePages();
+  }
+
+  async getPages() {
+    console.log(await this.appService.getAvailablePages());
+  }
 }

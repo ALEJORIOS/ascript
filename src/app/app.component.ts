@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
-import { filter, finalize } from 'rxjs';
+import { NavigationEnd, Router } from '@angular/router';
+import { filter } from 'rxjs';
+import { AppService } from './services/app.service';
 
 @Component({
   selector: 'app-root',
@@ -12,9 +13,13 @@ export class AppComponent {
   showLayout: boolean = false;
   exceptLayouts = ['/account/login', '/account/register', 'account/forgot']
   currentRoute: string = '/';
-  constructor(private router: Router){
+  constructor(
+    private router: Router,
+    private appService: AppService){
     this.getCurrentPage();
     this.changeTheme();
+    this.verifyPages();
+
     if(!localStorage.getItem('theme')){
       let currentTheme: string;
       if(!window.matchMedia){
@@ -48,5 +53,12 @@ export class AppComponent {
       },
       error: (err: any) => console.error(err)
     })
+  }
+
+  async verifyPages() {
+    const availablePages = await this.appService.getAvailablePages();
+    if(Object.keys(availablePages).length === 0){
+      this.appService.setAvailablePages();
+    }
   }
 }

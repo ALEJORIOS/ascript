@@ -38,4 +38,8 @@ export class BaseService {
     return this.httpClient.get(`${API}/docs/seq`);
   }
 
+  getEnablePages(){
+    return this.httpClient.get(`${API}/enable-pages`);
+  }
+
 }

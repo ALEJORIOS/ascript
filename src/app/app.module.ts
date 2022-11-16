@@ -8,6 +8,11 @@ import { NotfoundComponent } from './extrapages/notfound/notfound.component';
 import { TokenInterceptor } from './interceptors/token.interceptor';
 import { FooterComponent } from './layout/footer/footer.component';
 import { NavigationComponent } from './layout/navigation/navigation.component';
+import { AppService } from './services/app.service';
+import { StoreModule } from '@ngrx/store';
+import { availablePagesReducer } from './redux/data.reducer';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { environment } from '../environments/environment';
 
 @NgModule({
   declarations: [
@@ -19,7 +24,9 @@ import { NavigationComponent } from './layout/navigation/navigation.component';
   imports: [
     BrowserModule,
     HttpClientModule,
-    AppRoutingModule
+    AppRoutingModule,
+    StoreModule.forRoot({availablePages: availablePagesReducer}, {}),
+    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production })
   ],
   providers: [
     {

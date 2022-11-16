@@ -1,23 +1,35 @@
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { Store } from '@ngrx/store';
+import { first, Observable } from 'rxjs';
+import { setEnablePages } from '../redux/data.actions';
+import { API } from './conf';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AppService {
-
-  // State of user (logged or not)
-  private isLoggedSubject: BehaviorSubject<boolean>;
-
-  public get isLogged(): boolean {
-    return this.isLoggedSubject.value;
+  pages$!: Observable<string[]>;
+  constructor(
+    private httpClient: HttpClient,
+    private store: Store<{ availablePages: string[] }>) { 
+    this.pages$ = store.select('availablePages');
   }
 
-  public set isLogged(state: boolean) {
-    this.isLoggedSubject.next(state);
+  setAvailablePages() {
+    const params = new HttpParams().set('username', 'PRUEBAS01');
+    this.httpClient.get<any>(`${API}/user/private-pages`, {params}).subscribe({
+      next: (res) => {
+        this.store.dispatch(setEnablePages({pages: res.tabs}))
+      }
+    });
   }
 
-  constructor() { 
-    this.isLoggedSubject = new BehaviorSubject(false);
+  getAvailablePages(): Promise<Object> {
+    return new Promise((res) => {
+      this.pages$.subscribe({
+        next: (response) => res(response)
+      })
+    })
   }
 }

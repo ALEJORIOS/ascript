@@ -1,9 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AuthGuard } from '../guards/auth.guard';
 
 const routes: Routes = [
   {
     path: 'write',
+    canActivate: [AuthGuard],
     loadComponent: () => import('./write/write.component').then(p => p.WriteComponent)
   },
   {

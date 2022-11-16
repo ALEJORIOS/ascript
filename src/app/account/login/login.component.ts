@@ -4,6 +4,7 @@ import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { Router, RouterModule } from '@angular/router';
 import { AccountService } from 'src/app/services/account.service';
 import { AppService } from 'src/app/services/app.service';
+import { BaseService } from 'src/app/services/base.service';
 import { alertMethods, AlertsComponent } from 'src/app/shared/cmps/alerts/alerts.component';
 import { SpinnerComponent } from 'src/app/shared/cmps/spinner/spinner.component';
 
@@ -26,12 +27,13 @@ export class LoginComponent implements OnInit {
   constructor(
     private router: Router, 
     private accountService: AccountService,
-    private appService: AppService) { }
+    private appService: AppService,
+    private baseService: BaseService) { }
 
   ngOnInit(): void {
   }
 
-  login(){
+  login() {
     this.submit = true;
     this.form.markAllAsTouched();
     this.alert.hide()
@@ -43,7 +45,6 @@ export class LoginComponent implements OnInit {
             this.defineStatus(res.status);
           }else{
             sessionStorage.setItem('jwt', res.value);
-            this.appService.isLogged = true;
             this.router.navigate([res.landing]);
           }
         },
@@ -59,7 +60,7 @@ export class LoginComponent implements OnInit {
     }
   }
 
-  defineStatus(res: number){
+  defineStatus(res: number) {
     if(res === 2){
       this.alert.set('error', 'Este usuario se encuentra bloqueado');
       return;

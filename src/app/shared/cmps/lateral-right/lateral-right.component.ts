@@ -1,6 +1,7 @@
 import { BaseService } from './../../../services/base.service';
 import { Component, OnInit } from '@angular/core';
 import { ArticleComponent } from './article/article.component';
+import { AppService } from 'src/app/services/app.service';
 
 @Component({
   standalone: true,
@@ -11,10 +12,11 @@ import { ArticleComponent } from './article/article.component';
 })
 export class LateralRightComponent implements OnInit {
 
-
   trend: any;
 
-  constructor(private baseService: BaseService) { }
+  constructor(
+    private baseService: BaseService,
+    private appService: AppService) { }
 
   ngOnInit(): void {
     this.getTrends();
@@ -23,7 +25,6 @@ export class LateralRightComponent implements OnInit {
   getTrends(){
     this.baseService.getTrends().subscribe(res => {
       this.trend = res;
-      console.log(res);
     });
   }
 

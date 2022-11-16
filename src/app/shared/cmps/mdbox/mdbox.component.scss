@@ -1,4 +1,4 @@
-.markdownRenderBox{
+.markdownRenderBox {
     margin: 0.2rem;
     margin-left: 0;
     width: 100%;
@@ -7,7 +7,7 @@
     box-sizing: border-box;
     display: grid;
     grid-template-columns: 1fr 1fr;
-    .textArea{
+    .textArea {
         grid-column: 1/2;
         padding: .5rem;
         .field {
@@ -22,7 +22,7 @@
             font-family: 'Alata', sans-serif;
         }
     }
-    .rendered{
+    .rendered {
         box-sizing: border-box;
         grid-column: 2/3;
         padding: .5rem;
@@ -32,17 +32,17 @@
         margin: 0;
         background-color: #177eaa1a;
         cursor: pointer;
-        &:hover{
+        &:hover {
             background-color: #177eaa2a;
             transition: all 0.5s cubic-bezier(0.075, 0.82, 0.165, 1);
         }
         &::ng-deep {
-            *{
+            * {
                 margin: 0;
                 width: 100%;
                 box-sizing: border-box;
             }
-            code{
+            code {
                 display: flex;
                 padding: 0.5rem;
                 border: none;
