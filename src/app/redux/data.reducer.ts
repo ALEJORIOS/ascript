@@ -1,9 +1,15 @@
 import { createReducer, on } from "@ngrx/store";
-import { setEnablePages } from "./data.actions";
+import { setEnablePages, setStatusLogged } from "./data.actions";
 
-export const initialState = {};
+export const initialStateAvailablePages = {};
+export const initialStatelogged = {value: false};
 
 export const availablePagesReducer = createReducer(
-    initialState,
+    initialStateAvailablePages,
     on(setEnablePages, (state, { pages }) => ({ ...state, prop: pages}))
+);
+
+export const setLoggedReducer = createReducer(
+    initialStatelogged,
+    on(setStatusLogged, (state, { stateLogged }) => ({ ...state, prop: stateLogged})) 
 );

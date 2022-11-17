@@ -18,8 +18,8 @@ export class BaseService {
     return this.httpClient.get(`${API}/docs/read?seq=${seqCode}`);
   }
 
-  getPublicPages() {
-    return this.httpClient.get(`${API}/public-pages`);
+  getNavPages() {
+    return this.httpClient.get(`${API}/nav-pages`);
   }
 
   getPhrase() {
@@ -36,6 +36,10 @@ export class BaseService {
 
   getSeq() {
     return this.httpClient.get(`${API}/docs/seq`);
+  }
+
+  getCurrentSeq() {
+    return this.httpClient.get<number>(`${API}/docs/current-seq`);
   }
 
   getEnablePages(){

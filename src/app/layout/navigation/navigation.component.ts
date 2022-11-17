@@ -15,12 +15,12 @@ export class NavigationComponent implements OnInit {
   phrase: string = '';
 
   ngOnInit(): void {
-    this.getPublicPages();
+    this.getNavPages();
     this.getPhrase();
   }
 
-  getPublicPages() {
-    this.baseService.getPublicPages().subscribe({
+  getNavPages() {
+    this.baseService.getNavPages().subscribe({
       next: (res) => this.routes = res,
       error: (err) => console.error(err)
     })

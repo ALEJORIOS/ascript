@@ -17,9 +17,11 @@ export class AppService {
   }
 
   setAvailablePages() {
+    this.loadingAvailablePages = true;
     const params = new HttpParams().set('username', 'PRUEBAS01');
     this.httpClient.get<any>(`${API}/user/private-pages`, {params}).subscribe({
       next: (res) => {
+        this.loadingAvailablePages = false;
         this.store.dispatch(setEnablePages({pages: res.tabs}))
       }
     });
@@ -32,4 +34,6 @@ export class AppService {
       })
     })
   }
+
+  public loadingAvailablePages: boolean = false;
 }
