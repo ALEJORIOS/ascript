@@ -9,16 +9,9 @@ import { AppService } from 'src/app/services/app.service';
 })
 export class ArticlesComponent implements OnInit {
 
-  constructor(private appService: AppService) { }
+  constructor() { }
 
   ngOnInit(): void {
   }
 
-  setPages() {
-    this.appService.setAvailablePages();
-  }
-
-  async getPages() {
-    console.log(await this.appService.getAvailablePages());
-  }
 }

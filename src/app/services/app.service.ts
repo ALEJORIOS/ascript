@@ -2,7 +2,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { first, Observable } from 'rxjs';
-import { setEnablePages } from '../redux/data.actions';
+import { setEnablePages, setStatusLogged } from '../redux/data.actions';
 import { API } from './conf';
 
 @Injectable({
@@ -10,10 +10,13 @@ import { API } from './conf';
 })
 export class AppService {
   pages$!: Observable<string[]>;
+  logged$!: Observable<boolean>; 
   constructor(
     private httpClient: HttpClient,
-    private store: Store<{ availablePages: string[] }>) { 
-    this.pages$ = store.select('availablePages');
+    private storeAvailablePages: Store<{ availablePages: string[] }>,
+    private storeLoggedStatus: Store<{ loggedStatus: boolean }>) { 
+    this.pages$ = storeAvailablePages.select('availablePages');
+    this.logged$ = storeLoggedStatus.select('loggedStatus');
   }
 
   setAvailablePages() {
@@ -22,7 +25,7 @@ export class AppService {
     this.httpClient.get<any>(`${API}/user/private-pages`, {params}).subscribe({
       next: (res) => {
         this.loadingAvailablePages = false;
-        this.store.dispatch(setEnablePages({pages: res.tabs}))
+        this.storeAvailablePages.dispatch(setEnablePages({pages: res.tabs}))
       }
     });
   }
@@ -33,6 +36,36 @@ export class AppService {
         next: (response) => res(response)
       })
     })
+  }
+
+  async getStatusLogged(): Promise<boolean> {
+    await this.getTokenVerification();
+    return new Promise((res) => {
+      this.logged$.subscribe({
+        next: (response: any) => res(response.stateLogged)
+      })
+    })
+  }
+
+  getTokenVerification(): Promise<boolean> {
+    return new Promise((res) => {
+      this.httpClient.get<any>(`${API}/user/verifyToken`).subscribe({
+        next: (response) => {
+          if( response.code === 1) {
+            this.storeLoggedStatus.dispatch(setStatusLogged({stateLogged: true}));
+            res(true);
+          }else{
+            this.logOut();
+            res(false);
+          }
+        }
+      })
+    })
+  }
+
+  logOut() {
+    this.storeLoggedStatus.dispatch(setStatusLogged({stateLogged: false}));
+    this.storeAvailablePages.dispatch(setEnablePages({pages: []}));
   }
 
   public loadingAvailablePages: boolean = false;

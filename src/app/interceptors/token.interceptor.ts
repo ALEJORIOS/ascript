@@ -1,6 +1,7 @@
 import { API } from './../services/conf';
+import { catchError, Observable, of, throwError, filter, tap } from 'rxjs';
 import { Router } from '@angular/router';
-import { Injectable } from '@angular/core';
+import { Injectable, Pipe } from '@angular/core';
 import {
   HttpRequest,
   HttpHandler,
@@ -10,9 +11,11 @@ import {
   HttpErrorResponse,
   HttpResponse
 } from '@angular/common/http';
-import { catchError, Observable, of, throwError, filter } from 'rxjs';
 
-@Injectable()
+
+@Injectable({
+  providedIn: 'root'
+})
 export class TokenInterceptor implements HttpInterceptor {
 
   constructor(private router: Router) {}
@@ -28,17 +31,14 @@ export class TokenInterceptor implements HttpInterceptor {
     });
 
     return next.handle(request)
-      .pipe(this.responseManagement);
+      .pipe(
+        tap(this.responseManagement)
+      );
   }
 
   responseManagement(response: any){
-    response.subscribe({
-      next: (res: any) => {
-        if(res.body?.code === 4){
-          this.router.navigate(['account/login']);
-        }
-      }
-    })
-    return response;
+    if(response.body?.code === 4){
+      this.router.navigate(['account/login']);
+    }
   }
 }

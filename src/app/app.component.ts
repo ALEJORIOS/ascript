@@ -16,9 +16,10 @@ export class AppComponent {
   constructor(
     private router: Router,
     private appService: AppService){
-    this.getCurrentPage();
-    this.changeTheme();
-    this.verifyPages();
+      appService.getTokenVerification();
+      this.getCurrentPage();
+      this.changeTheme();
+      this.verifyPages();
 
     if(!localStorage.getItem('theme')){
       let currentTheme: string;
@@ -56,9 +57,9 @@ export class AppComponent {
   }
 
   async verifyPages() {
-    const availablePages = await this.appService.getAvailablePages();
-    if(Object.keys(availablePages).length === 0){
+    if(await this.appService.getStatusLogged()){
       this.appService.setAvailablePages();
     }
-  }
+  }  
+    
 }
