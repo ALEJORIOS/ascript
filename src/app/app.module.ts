@@ -7,9 +7,6 @@ import { AppComponent } from './app.component';
 import { TokenInterceptor } from './interceptors/token.interceptor';
 import { FooterComponent } from './layout/footer/footer.component';
 import { NavigationComponent } from './layout/navigation/navigation.component';
-import { StoreModule } from '@ngrx/store';
-import { availablePagesReducer, setLoggedReducer } from './redux/data.reducer';
-import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
 
 @NgModule({
@@ -21,9 +18,7 @@ import { environment } from '../environments/environment';
   imports: [
     BrowserModule,
     HttpClientModule,
-    AppRoutingModule,
-    StoreModule.forRoot({availablePages: availablePagesReducer, loggedStatus: setLoggedReducer}),
-    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production })
+    AppRoutingModule
   ],
   providers: [
     {

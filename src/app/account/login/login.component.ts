@@ -2,11 +2,9 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
-import { Store } from '@ngrx/store';
 import { filter, Observable } from 'rxjs';
-import { setStatusLogged } from 'src/app/redux/data.actions';
 import { AccountService } from 'src/app/services/account.service';
-import { AppService } from 'src/app/services/app.service';
+import { AppService, variables } from 'src/app/services/app.service';
 import { BaseService } from 'src/app/services/base.service';
 import { alertMethods, AlertsComponent } from 'src/app/shared/cmps/alerts/alerts.component';
 import { SpinnerComponent } from 'src/app/shared/cmps/spinner/spinner.component';
@@ -25,7 +23,6 @@ export class LoginComponent implements OnInit {
     password: new FormControl('', Validators.required)
   })
 
-  loggedStatus$: Observable<boolean>;
   submit: boolean = false;
   alert = new alertMethods();
   currentRoute!: string;
@@ -34,10 +31,8 @@ export class LoginComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private accountService: AccountService,
     private appService: AppService,
-    private baseService: BaseService,
-    private store: Store<{ loggedStatus: boolean }>) { 
-      this.loggedStatus$ = store.select('loggedStatus');
-    }
+    private variables: variables,
+    private baseService: BaseService) { }
 
   ngOnInit(): void {
     this.activatedRoute.queryParams
@@ -62,7 +57,8 @@ export class LoginComponent implements OnInit {
             this.defineStatus(res.status);
           } else {
             sessionStorage.setItem('jwt', res.value);
-            this.store.dispatch(setStatusLogged({stateLogged: true}));
+            this.variables.isLogged = true;
+            this.appService.setAvailablePages();
             if(!this.currentRoute) this.router.navigate([res.landing]);
             else this.router.navigate([this.currentRoute]);
           }
