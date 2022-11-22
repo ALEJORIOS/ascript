@@ -1,6 +1,5 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { first, Observable } from 'rxjs';
 import { API } from './conf';
 
 @Injectable({
@@ -11,8 +10,7 @@ export class AppService {
 
   setAvailablePages() {
     this.loadingAvailablePages = true;
-    const params = new HttpParams().set('username', 'PRUEBAS01');
-    this.httpClient.get<any>(`${API}/user/private-pages`, {params}).subscribe({
+    this.httpClient.get<any>(`${API}/user/private-pages`).subscribe({
       next: (res) => {
         this.variables.availablePages = res;
       },
@@ -26,14 +24,7 @@ export class AppService {
     return this.variables.availablePages;
   }
 
-  async getStatusLogged(): Promise<boolean> {
-    await this.getTokenVerification();
-    return new Promise((res) => {
-
-    })
-  }
-
-  getTokenVerification(): Promise<boolean> {
+  getStatuslogged(): Promise<boolean> {
     return new Promise((res) => {
       this.httpClient.get<any>(`${API}/user/verifyToken`).subscribe({
         next: (response) => {
@@ -57,10 +48,13 @@ export class AppService {
   public loadingAvailablePages: boolean = false;
 }
 
+@Injectable({
+  providedIn: 'root'
+})
 export class variables {
 
   private loggedStatus: boolean = false;
-  private availablePagesList: Array<any> = [];
+  private availablePagesList: Array<string> = [];
 
   public get isLogged() {
     return this.loggedStatus;
@@ -74,7 +68,7 @@ export class variables {
     return this.availablePagesList;
   }
 
-  public set availablePages(newPages: Array<any>) {
-    this.availablePages = newPages;
+  public set availablePages(newPages: Array<string>) {
+    this.availablePagesList = newPages;
   }
 }

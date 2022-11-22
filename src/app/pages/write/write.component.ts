@@ -61,7 +61,6 @@ export class WriteComponent implements OnInit {
   getUsername(){
     const helper = new JwtHelperService();
     const decodedToken = helper.decodeToken(sessionStorage.getItem('jwt') || '');
-    console.log(decodedToken)
     this.user = decodedToken.name;
     this.username = decodedToken.username;
   }

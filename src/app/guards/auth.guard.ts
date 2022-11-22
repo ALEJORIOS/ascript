@@ -9,9 +9,8 @@ import { AppService } from '../services/app.service';
 export class AuthGuard implements CanActivate {
   constructor(private appService: AppService) {}
 
-  canActivate( route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Promise<boolean> | boolean {
-    return new Promise((res) => {
-      
-    })
+  canActivate( route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
+    const currentPage = '/'+route.url[0].path;
+    return this.appService.getAvailablePages().includes(currentPage) ? true : false;
   } 
 }

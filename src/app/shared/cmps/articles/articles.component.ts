@@ -9,9 +9,13 @@ import { AppService } from 'src/app/services/app.service';
 })
 export class ArticlesComponent implements OnInit {
 
-  constructor() { }
+  constructor(private appService: AppService) { }
 
   ngOnInit(): void {
+  }
+
+  show() {
+    console.log(this.appService.getAvailablePages());
   }
 
 }
