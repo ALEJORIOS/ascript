@@ -18,7 +18,7 @@ import {
 })
 export class TokenInterceptor implements HttpInterceptor {
 
-  constructor(private router: Router) {}
+  constructor() {}
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
 
@@ -31,14 +31,5 @@ export class TokenInterceptor implements HttpInterceptor {
     });
 
     return next.handle(request)
-      .pipe(
-        tap(this.responseManagement)
-      );
-  }
-
-  responseManagement(response: any){
-    if(response.body?.code === 4){
-      this.router.navigate(['account/login']);
-    }
   }
 }

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AppService } from 'src/app/services/app.service';
 import { BaseService } from 'src/app/services/base.service';
 
 @Component({
@@ -8,20 +9,28 @@ import { BaseService } from 'src/app/services/base.service';
 })
 export class NavigationComponent implements OnInit {
 
-  constructor(private baseService: BaseService) { }
+  constructor(private baseService: BaseService, private appService: AppService) { }
 
   routes: any = [];
   loadingPhrase: boolean = false;
   phrase: string = '';
 
   ngOnInit(): void {
-    this.getNavPages();
+    this.getPublicNavPages();
     this.getPhrase();
   }
 
-  getNavPages() {
-    this.baseService.getNavPages().subscribe({
-      next: (res) => this.routes = res,
+  getPublicNavPages() {
+    this.baseService.getPublicNavPages().subscribe({
+      next: async (res) => {
+        this.routes = res;
+        await this.appService.getStatuslogged().then(response => {
+          if(response) {
+            const loginIndex = this.routes.findIndex((route: any) => route.name === "Login");
+            this.routes.splice(loginIndex, 1);
+          }
+        })
+      },
       error: (err) => console.error(err)
     })
   }

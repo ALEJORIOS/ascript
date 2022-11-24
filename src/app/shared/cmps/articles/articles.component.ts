@@ -15,7 +15,10 @@ export class ArticlesComponent implements OnInit {
   }
 
   show() {
-    console.log(this.appService.getAvailablePages());
+    this.appService.getStatuslogged().then(res => {
+      console.log('Estado de logueo: ',res);
+    });
+    console.log('Páginas disponibles: ', this.appService.getAvailablePages());
   }
 
 }

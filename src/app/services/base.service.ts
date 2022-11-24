@@ -23,6 +23,10 @@ export class BaseService {
     return this.httpClient.get(`${API}/nav-pages`);
   }
 
+  getPublicNavPages() {
+    return this.httpClient.get(`${API}/user/nav-public`);
+  }
+
   getPhrase() {
     return this.httpClient.get<string>(`${API}/phrase`);
   }

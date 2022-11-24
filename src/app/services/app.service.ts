@@ -1,5 +1,6 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
 import { API } from './conf';
 
 @Injectable({
@@ -9,13 +10,13 @@ export class AppService {
   constructor(private httpClient: HttpClient, protected variables: variables) { }
 
   setAvailablePages() {
-    this.loadingAvailablePages = true;
+    this.loadingAvailablePages.next(true);
     this.httpClient.get<any>(`${API}/user/private-pages`).subscribe({
       next: (res) => {
         this.variables.availablePages = res;
       },
       complete: () => {
-        this.loadingAvailablePages = false;
+        this.loadingAvailablePages.next(false);
       }
     });
   }
@@ -35,7 +36,8 @@ export class AppService {
             this.logOut();
             res(false);
           }
-        }
+        },
+        error: (err) => console.error(err)
       })
     })
   }
@@ -45,7 +47,7 @@ export class AppService {
     this.variables.isLogged = false;
   }
 
-  public loadingAvailablePages: boolean = false;
+  public loadingAvailablePages = new BehaviorSubject(false);
 }
 
 @Injectable({
