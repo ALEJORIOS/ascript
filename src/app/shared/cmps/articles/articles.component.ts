@@ -11,8 +11,7 @@ export class ArticlesComponent implements OnInit {
 
   constructor(private appService: AppService) { }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   show() {
     this.appService.getStatuslogged().then(res => {
@@ -20,5 +19,4 @@ export class ArticlesComponent implements OnInit {
     });
     console.log('Páginas disponibles: ', this.appService.getAvailablePages());
   }
-
 }
