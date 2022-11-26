@@ -39,6 +39,14 @@ export class BaseService {
     return this.httpClient.post(`${API}/docs/publish-doc`, body);
   }
 
+  postImage(formData: FormData) {
+    return this.httpClient.post(`${API}/docs/upload-img`, formData);
+  }
+
+  getImage() {
+    return this.httpClient.get<any>(`${API}/docs/download-img`);
+  }
+
   getSeq() {
     return this.httpClient.get(`${API}/docs/seq`);
   }
@@ -50,5 +58,4 @@ export class BaseService {
   getEnablePages(){
     return this.httpClient.get(`${API}/enable-pages`);
   }
-
 }

@@ -1,2 +1,3 @@
-<span>Artículos</span>
-<button (click)='show()'>Show</button>
+<input type="file" (change)="uploadImg($event)">
+<button (click)="downloadImg()">Mostrar imagen</button>
+<img *ngIf="showImg" [src]="urlLink" alt="Listo para mostrar">
