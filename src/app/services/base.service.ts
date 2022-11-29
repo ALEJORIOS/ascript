@@ -1,5 +1,4 @@
 import { API } from './conf';
-// import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
@@ -12,7 +11,7 @@ export class BaseService {
 
   getTrends(take: number = 5) {
     const params = new HttpParams().set('take', take);
-    return this.httpClient.get(`${API}/docs/preview-trends`, {params});
+    return this.httpClient.get<Array<any>>(`${API}/docs/preview-trends`, {params});
   }
 
   getArticle(seqCode: number) {
@@ -43,8 +42,14 @@ export class BaseService {
     return this.httpClient.post(`${API}/docs/upload-img`, formData);
   }
 
-  getImage() {
-    return this.httpClient.get<any>(`${API}/docs/download-img`);
+  getImage(public_id: string) {
+    const params = new HttpParams().set('id', public_id);
+    return this.httpClient.get<any>(`${API}/docs/download-img`, {params});
+  }
+
+  getImages(public_ids: Array<string>) {
+    const params = new HttpParams().set('id', public_ids.join('@'));
+    return this.httpClient.get<any>(`${API}/docs/download-img`, {params});
   }
 
   getSeq() {
@@ -58,4 +63,5 @@ export class BaseService {
   getEnablePages(){
     return this.httpClient.get(`${API}/enable-pages`);
   }
+
 }

@@ -1,3 +1,8 @@
-<input type="file" (change)="uploadImg($event)">
-<button (click)="downloadImg()">Mostrar imagen</button>
-<img *ngIf="showImg" [src]="urlLink" alt="Listo para mostrar">
+<div class="logged">
+    
+</div>
+<div class="unlogged">
+    <div class="box" *ngFor="let item of docs">
+        {{item._id}}
+    </div>
+</div>
