@@ -2,7 +2,11 @@
     
 </div>
 <div class="unlogged">
-    <div class="box" *ngFor="let item of docs">
-        {{item._id}}
+    <div class="box" *ngFor="let doc of docs">
+        <div class="thumbnail" [ngStyle]="doc.thumbnail"></div>
+        <div class="descBox">
+            <span class="title">{{ doc.name }}</span><br>
+            <span class="author">{{ doc.author }}</span>
+        </div>
     </div>
 </div>
