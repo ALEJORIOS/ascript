@@ -33,4 +33,8 @@ export class ArticlesComponent implements OnInit {
   getImages() {
     
   }
+
+  copyCode(seq: number) {
+    navigator.clipboard.writeText(seq.toString());
+  }
 }

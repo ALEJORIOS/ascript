@@ -1,44 +1,124 @@
-.unlogged {
-    display: grid;
-    box-sizing: border-box;
-    grid-template-columns: 1fr 1fr 1fr;
-    gap: 1rem;
-    width: 100%;
-    height: 100%;
-    padding: 2rem;
-    .box {
-        border: none;
-        border-radius: 8px;
-        box-shadow: #00000040 0px 2px 4px 0px;
-        cursor: pointer;
-        height: 20em;
-        transition: all 0.3s ease-in;
-
-        .thumbnail {
-            height: 40%;
-            width: auto;
-            border-radius: 8px 8px 0 0;
-        }
-
-        .descBox {
-            padding: 0.7rem;
-            height: 60%;
-            border-radius: 0 0 8px 8px;
-            .title {
-                font-size: 1.4rem;
-                color: #404040;
-                font-family: 'Alata', sans-serif;
+    .unlogged {
+        display: grid;
+        box-sizing: border-box;
+        grid-template-columns: repeat(auto-fill, 328px);
+        gap: 1rem;
+        width: 100%;
+        height: 100%;
+        padding: 2rem;
+        justify-content: center;
+        .box {
+            border: none;
+            border-radius: 8px;
+            box-shadow: #00000040 0px 2px 4px 0px;
+            background-color: #FEFEFE;
+            color: #808080;
+            cursor: pointer;
+            height: 20em;
+            position: relative;
+            transition: all 0.3s ease-in;
+            justify-self: flex-end;
+            .thumbnail {
+                height: 40%;
+                width: auto;
+                border-radius: 8px 8px 0 0;
             }
-            .author {
-                font-size: 0.8rem;
-                color: #303030;
+    
+            .seq {
+                position: absolute;
+                z-index: 2;
+                top: 8px;
+                left: 8px;
+                background-color: #FEFEFE;
+                border-radius: 4px;
+                padding: 3px;
+                font-size: 0.7em;
                 font-family: 'lato', sans-serif;
-                font-weight: 700;
+                user-select: none;
+                &:hover {
+                    box-shadow: 0 0 3px 3px #FEFEFEAA;
+                }
             }
-        }
-        &:hover {
-            box-shadow: #00000090 0px 2px 4px 0px;
-            transition: all 0.1s ease-out;
+
+            .copy-notification {
+                position: absolute;
+                top: 30px;
+                left: 8px;
+                background-color: #FEFEFE;
+                padding: 3px;
+                border-radius: 4px;
+                font-size: 0.8em;
+                font-family: 'lato', sans-serif;
+            }
+
+
+    
+            .descBox {
+                padding: 0.7rem;
+                height: 60%;
+                border-radius: 0 0 8px 8px;
+                .title {
+                    font-size: 1.4rem;
+                    color: #404040;
+                    font-family: 'Alata', sans-serif;
+                }
+                .properties {
+                    display: flex;
+                    align-items: center;
+                    .author {
+                        font-size: 0.8rem;
+                        color: #303030;
+                        font-family: 'lato', sans-serif;
+                        font-weight: 700;
+                    }
+                    .like-icon {
+                        height: 0.8em;
+                        margin-left: 1rem;
+                        filter: invert(70%) sepia(19%) saturate(19%) hue-rotate(355deg) brightness(95%) contrast(85%);
+                        &:hover {
+                            animation: 1.4s ease-out 0s infinite beat;
+                        }
+                    }
+                    .likes {
+                        margin-left: 0.1em;
+                        font-family: 'Alata', sans-serif;
+                        color: #606060;
+                        font-size: 0.8em;
+                    }
+                    .read-icon {
+                        height: 0.8em;
+                        margin-left: 1rem;
+                        filter: invert(58%) sepia(1%) saturate(0%) hue-rotate(255deg) brightness(102%) contrast(97%);
+                    }
+                    .views {
+                        margin-left: 0.1em;
+                        font-family: 'Alata', sans-serif;
+                        color: #606060;
+                        font-size: 0.8em;
+                    }
+                }
+                .description {
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    display: -webkit-box;
+                    -webkit-line-clamp: 5;
+                    -webkit-box-orient: vertical;
+                    font-family: 'lato', sans-serif;
+                    user-select: none;
+                }
+    
+            }
+            &:hover {
+                box-shadow: #00000090 0px 2px 4px 0px;
+                z-index: 1;
+                transform: scale(1.05, 1.05);
+                transition: all 0.1s ease-out;
+                color: #404040;
+            }
         }
     }
-}
+    
+    @keyframes beat {
+        0%, 50%, 100% { transform: scale(1, 1); }
+        30%, 80% { transform: scale(0.84, 0.90); }
+    }

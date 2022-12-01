@@ -4,9 +4,19 @@
 <div class="unlogged">
     <div class="box" *ngFor="let doc of docs">
         <div class="thumbnail" [ngStyle]="doc.thumbnail"></div>
+        <div class="seq" copied="'none'" (click)="copyCode(doc.seq)">{{ doc.seq }}</div>
+        <div class="copy-notification">Copiado</div>
         <div class="descBox">
             <span class="title">{{ doc.name }}</span><br>
-            <span class="author">{{ doc.author }}</span>
+            <div class="properties">
+                <span class="author">{{ doc.author }}</span>
+                <img *ngIf="doc.likes > 0" class="like-icon" src="assets/icons/heart-icon.svg">
+                <img *ngIf="doc.likes === 0" class="like-icon" src="assets/icons/heart-crack-icon.svg">
+                <span class="likes">{{ doc.likes }}</span>
+                <img *ngIf="doc.views" class="read-icon" src="assets/icons/glasses-icon.svg">
+                <span *ngIf="doc.views" class="views">{{ doc.views }}</span>
+            </div>
+            <p class="description">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Dicta deserunt veritatis eos. Delectus unde, deserunt illum non reprehenderit alias, dolorum excepturi eaque rerum quae provident nobis voluptatibus, corrupti in a eveniet officiis. Officiis obcaecati a, laborum iste perspiciatis veniam voluptatem ipsam at commodi similique odio corrupti? Facilis ex eius consequatur maiores optio nam odio molestiae dignissimos! Voluptatem placeat culpa aliquam laborum nihil magni natus eius assumenda incidunt magnam, perspiciatis fugiat nesciunt ipsam, numquam at delectus similique possimus perferendis aspernatur sit! Dicta aperiam hic tempore temporibus quia consequatur, error doloremque dignissimos dolorum exercitationem ipsa, maxime consequuntur corrupti. Nesciunt, doloribus vitae! Repellendus?</p>
         </div>
     </div>
 </div>
