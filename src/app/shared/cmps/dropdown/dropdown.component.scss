@@ -1,0 +1,24 @@
+.dropDownBox {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    background-color: #FDFDFD;
+    z-index: 2;
+    border: 1px solid #DADADA;
+    border-radius: 6px;
+    user-select: none;
+    cursor: pointer;
+    button {
+        border: none;
+        border-radius: 6px;
+        font-family: 'lato', sans-serif;
+        font-size: 0.8em;
+        height: 1.7em;
+        text-align: left;
+        background-color: #FDFDFD;
+        cursor: pointer;
+        &:hover {
+            background-color: #F0F0F0;
+        }
+    }
+}

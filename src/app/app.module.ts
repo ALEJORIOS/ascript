@@ -8,6 +8,8 @@ import { TokenInterceptor } from './interceptors/token.interceptor';
 import { FooterComponent } from './layout/footer/footer.component';
 import { NavigationComponent } from './layout/navigation/navigation.component';
 import { environment } from '../environments/environment';
+import { ClickOutsideDirective } from './directives/click-outside.directive';
+import { PreventRightClickDirective } from './directives/prevent-right-click.directive';
 
 @NgModule({
   declarations: [

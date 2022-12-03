@@ -1,11 +1,12 @@
+<dropdown></dropdown>
 <div class="logged">
     
 </div>
 <div class="unlogged">
-    <div class="box" *ngFor="let doc of docs">
+    <div class="box" *ngFor="let doc of docs" RightClick [data]="{seq: doc.seq}">
         <div class="thumbnail" [ngStyle]="doc.thumbnail"></div>
-        <div class="seq" copied="'none'" (click)="copyCode(doc.seq)">{{ doc.seq }}</div>
-        <div class="copy-notification">Copiado</div>
+        <div class="seq" (click)="copyCode(doc)">{{ doc.seq }}</div>
+        <div *ngIf="doc.showCopyNot" class="copy-notification" (click)="doc.showCopyNot = false">Copiado</div>
         <div class="descBox">
             <span class="title">{{ doc.name }}</span><br>
             <div class="properties">

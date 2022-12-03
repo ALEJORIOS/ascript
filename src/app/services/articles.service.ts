@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { map, pipe } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -7,6 +7,7 @@ import { map, pipe } from 'rxjs';
 export class ArticlesService {
 
   constructor() { }
+  rightClickSubject = new BehaviorSubject({name: "", coords: {x: 0, y: 0}, data: {}});
 
   prepareObject(inputObject: Array<any>): Array<any> {
     inputObject.forEach(obj => obj.thumbnail = {
@@ -16,4 +17,6 @@ export class ArticlesService {
     });
     return inputObject;
   }
+
 }
+

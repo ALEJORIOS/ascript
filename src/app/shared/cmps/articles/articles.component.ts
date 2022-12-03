@@ -1,19 +1,21 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { map } from 'rxjs';
+import { RightClickDirective } from 'src/app/directives/right-click.directive';
 import { ArticlesService } from 'src/app/services/articles.service';
 import { BaseService } from 'src/app/services/base.service';
+import { DropdownComponent } from '../dropdown/dropdown.component';
 
 @Component({
   standalone: true,
   selector: 'articles',
   templateUrl: './articles.component.html',
   styleUrls: ['./articles.component.scss'],
-  imports: [CommonModule]
+  imports: [CommonModule, RightClickDirective, DropdownComponent]
 })
 export class ArticlesComponent implements OnInit {  
 
   docs: Array<any> = [];
+  showCopyNot: boolean = false;
   constructor(private baseService: BaseService, private articlesService: ArticlesService) { }
 
   ngOnInit(): void {
@@ -30,11 +32,13 @@ export class ArticlesComponent implements OnInit {
     })
   }
 
-  getImages() {
-    
+  copyCode(doc: any) {
+    navigator.clipboard.writeText(doc.seq.toString());
+    doc.showCopyNot = true;
+    setTimeout(() => {
+      doc.showCopyNot = false;
+    }, 1000);
   }
 
-  copyCode(seq: number) {
-    navigator.clipboard.writeText(seq.toString());
-  }
+
 }
